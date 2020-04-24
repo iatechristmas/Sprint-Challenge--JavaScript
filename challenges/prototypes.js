@@ -1,35 +1,47 @@
-// ==== Closures ==== 
+/* ===== Prototype Practice ===== */
 
-/* Task 1: Study the code below and explain in your own words why nested function can access the variable internal. */
+// Task: You are to build a cuboid maker that can return values for a cuboid's volume or surface area. Cuboids are similar to cubes but do not have even sides. Follow the steps in order to accomplish this challenge.
 
+/* == Step 1: Base Constructor ==
+  Create a constructor function named CuboidMaker that accepts properties for length, width, and height
+*/
 
-const external = "I'm outside the function";
-
-function myFunction() {
-  console.log(external);
-  const internal = "Hello! I'm inside myFunction!";
-
-  function nestedFunction() {
-    console.log(internal);
-  };
-  nestedFunction();
-}
-myFunction();
-
-// Explanation: 
-
-// nestedFunction can access internal because internal is above the function in the scope of myFunction, and NestedFunction is a child of the parent function.
-
-/* Task 2: Counter */
-
-function sumation(num) {
-  let count = 0
-  for (let i = num; i >= 0; i--) {
-    count += i;
-  }
-  return count
+function Cuboidmaker(length, width, height) {
+  this.length = length;
+  this.width = width;
+  this.height = height;
 }
 
-console.log('sumation: ', sumation(4))
+/* == Step 2: Volume Method ==
+  Create a method using CuboidMaker's prototype that returns the volume of a given cuboid's length, width, and height
 
-/* Create a function called `sumation` that accepts a parameter and uses a counter to return the summation of that number. For example, `summation(4)` should return 10 because 1+2+3+4 is 10. */
+  Formula for cuboid volume: length * width * height
+*/
+
+Cuboidmaker.prototype.volume = function () {
+  return this.length * this.width * this.height
+}
+
+
+/* == Step 3: Surface Area Method ==
+  Create another method using CuboidMaker's prototype that returns the surface area of a given cuboid's length, width, and height.
+
+  Formula for cuboid surface area of a cube: 2 * (length * width + length * height + width * height)
+*/
+
+Cuboidmaker.prototype.surfaceArea = function () {
+  return 2 * (this.length * this.width + this.length * this.height + this.width * this.height)
+}
+
+/* == Step 4: Create a new object that uses CuboidMaker ==
+  Create a cuboid object that uses the new keyword to use our CuboidMaker constructor
+  Add properties and values of length: 4, width: 5, and height: 5 to cuboid.
+*/
+
+const cuboid = new Cuboidmaker(4, 5, 5)
+
+// Test your volume and surfaceArea methods by uncommenting the logs below:
+console.log(cuboid.volume()); // 100
+console.log(cuboid.surfaceArea()); // 130
+
+
